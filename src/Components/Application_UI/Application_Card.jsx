@@ -13,8 +13,14 @@ const Application_Card = ({ company, position, status, appliedDate, job }) => {
         <p className="text-gray-600 font-semibold">{status}</p>
         <p className="text-gray-600 font-semibold">{appliedDate}</p>
 
-        <div className="flex justify-end">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+        <div className="flex justify-end pr-4">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            onClick={() => {
+              setShowDetails(true);
+              setShowJob(job);
+            }}
+          >
             View Details
           </button>
         </div>
