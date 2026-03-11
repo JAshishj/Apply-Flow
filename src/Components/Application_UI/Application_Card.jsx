@@ -6,29 +6,27 @@ const Application_Card = ({ company, position, status, appliedDate, job }) => {
   const [showJob, setShowJob] = useState("");
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-5 m-2 inline-flex w-full justify-between items-center">
-      <h2 className="text-xl font-bold">{company}</h2>
-      <p className="text-gray-600">{position}</p>
-      <p className="text-gray-600">{status}</p>
-      <p className="text-gray-600">{appliedDate}</p>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        onClick={() => {
-          setShowDetails(true);
-          setShowJob(job);
-        }}
-      >
-        View Details
-      </button>
+    <>
+      <div className="bg-white shadow-md rounded-lg px-6 py-4 m-2 grid grid-cols-5 gap-50 items-center">
+        <h2 className="font-bold">{company}</h2>
+        <p className="text-gray-600 font-semibold">{position}</p>
+        <p className="text-gray-600 font-semibold">{status}</p>
+        <p className="text-gray-600 font-semibold">{appliedDate}</p>
 
-      {showDetails && (
-        <Application_Modal
-          job={showJob}
-          setShowDetails={setShowDetails}
-          setShowJob={setShowJob}
-        />
-      )}
-    </div>
+        <div className="flex justify-end">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            View Details
+          </button>
+        </div>
+        {showDetails && (
+          <Application_Modal
+            job={showJob}
+            setShowDetails={setShowDetails}
+            setShowJob={setShowJob}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

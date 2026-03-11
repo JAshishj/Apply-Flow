@@ -46,33 +46,38 @@ const Applications = () => {
       </div>
 
       <hr className="border-gray-500 mt-[2%]" />
-      <div className="flex my-5 text-2xl">
-        <p className="ml-[2%]">Company</p>
-        <p className="ml-[16%]">Position</p>
-        <p className="ml-[18%]">Status</p>
-        <p className="ml-[15%]">Applied Date</p>
+      <div className="grid grid-cols-5 gap-42 items-center px-6 py-4 text-2xl font-semibold border-b">
+        <p>Company</p>
+        <p>Position</p>
+        <p>Status</p>
+        <p>Applied Date</p>
+        <p></p>
       </div>
       <hr className="border-gray-500" />
 
       <div>
-        {applications.filter(
-          (job) =>
-            (statusFilter === "all" || job.status === statusFilter) &&
-            job.company.toLowerCase().includes(query.toLowerCase()),
-        ).map((job, index) => (
-          <Application_Card
-            key={index}
-            company={job.company}
-            position={job.title}
-            status={job.status}
-            appliedDate={job.appliedDate}
-            job={job}
-          />
-        ))}
+        {applications
+          .filter(
+            (job) =>
+              (statusFilter === "all" || job.status === statusFilter) &&
+              job.company.toLowerCase().includes(query.toLowerCase()),
+          )
+          .map((job, index) => (
+            <Application_Card
+              key={index}
+              company={job.company}
+              position={job.title}
+              status={job.status}
+              appliedDate={job.appliedDate}
+              job={job}
+            />
+          ))}
       </div>
 
       <div>
-        {showapplication && <Add_New_Application setShowApplication={setShowApplication} />}
+        {showapplication && (
+          <Add_New_Application setShowApplication={setShowApplication} />
+        )}
       </div>
     </div>
   );
