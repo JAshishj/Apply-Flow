@@ -8,7 +8,7 @@ const Application_Card = ({ company, position, status, appliedDate, job }) => {
   return (
     <>
       <div className="bg-white shadow-md rounded-lg px-6 py-4 m-2 grid grid-cols-5 gap-50 items-center">
-        <h2 className="font-bold">{company}</h2>
+        <h2 className="text-xl font-bold">{company}</h2>
         <p className="text-gray-600 font-semibold">{position}</p>
         <p className="text-gray-600 font-semibold">{status}</p>
         <p className="text-gray-600 font-semibold">{appliedDate}</p>
