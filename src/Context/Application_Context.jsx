@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
       // If localStorage has data, use it; otherwise use sample data
       return parsed.length > 0 ? parsed :[];
     }
-    return Sample_Applications;
+    return Sample_Applications; //Delete this line if you want to start with an empty list instead of sample data
   });
 
   useEffect(() => {
