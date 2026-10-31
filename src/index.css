@@ -1,8 +1,184 @@
 @import "tailwindcss";
 
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  width: 100%;
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  ApplyFlow design tokens
+  -----------------------
+  Canvas: cool mist, not cream. Accent: marigold signal. Ink: green-black.
+  Shape system (documented, applied everywhere):
+    controls 10px | tiles 12px | panels 18px | dialogs 22px | status pills full
+*/
+
+@theme inline {
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Instrument Sans Variable",
+    ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo,
+    monospace;
+
+  --color-canvas: var(--canvas);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    --canvas: #f1f2ee;
+    --panel: #fbfbf9;
+    --panel-2: #e7e9e3;
+    --ink: #151812;
+    --muted: #5a6156;
+    --faint: #6a7166;
+    --line: #dde0d8;
+    --line-strong: #c6cbc1;
+
+    --accent: #e2a021;
+    --accent-hover: #d3921a;
+    --accent-ink: #171203;
+    --accent-text: #8a5a00;
+    --accent-soft: #f8ebd0;
+
+    --stage-applied-soft: #e7e9e2;
+    --stage-applied-ink: #4c5348;
+    --stage-applied-solid: #7a8274;
+
+    --stage-interview-soft: #e2ebf0;
+    --stage-interview-ink: #2c5a74;
+    --stage-interview-solid: #3d6f8e;
+
+    --stage-offer-soft: #e0ece0;
+    --stage-offer-ink: #2f6b3c;
+    --stage-offer-solid: #46804f;
+
+    --stage-rejected-soft: #f2e4de;
+    --stage-rejected-ink: #9a3d2d;
+    --stage-rejected-solid: #b4523c;
+
+    --shadow-panel: 0 1px 2px rgba(21, 24, 18, 0.04),
+      0 14px 36px -24px rgba(21, 24, 18, 0.4);
+    --shadow-raise: 0 1px 2px rgba(21, 24, 18, 0.06),
+      0 18px 48px -20px rgba(21, 24, 18, 0.3);
+  }
+
+  .dark {
+    color-scheme: dark;
+
+    --canvas: #0b0e0b;
+    --panel: #141813;
+    --panel-2: #101410;
+    --ink: #f0f2ec;
+    --muted: #a7aea2;
+    --faint: #8b9286;
+    --line: #232821;
+    --line-strong: #31372e;
+
+    --accent: #f2b94a;
+    --accent-hover: #f7c463;
+    --accent-ink: #171203;
+    --accent-text: #f2b94a;
+    --accent-soft: #2a2011;
+
+    --stage-applied-soft: #1d211b;
+    --stage-applied-ink: #b7bfb1;
+    --stage-applied-solid: #8b9484;
+
+    --stage-interview-soft: #14232b;
+    --stage-interview-ink: #8fb9c9;
+    --stage-interview-solid: #5e93a8;
+
+    --stage-offer-soft: #13291a;
+    --stage-offer-ink: #82cf9a;
+    --stage-offer-solid: #4d9e68;
+
+    --stage-rejected-soft: #2b1a14;
+    --stage-rejected-ink: #e3a48c;
+    --stage-rejected-solid: #c4735a;
+
+    --shadow-panel: 0 1px 0 rgba(255, 255, 255, 0.02),
+      0 18px 40px -28px rgba(0, 0, 0, 0.8);
+    --shadow-raise: 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 28px 64px -24px rgba(0, 0, 0, 0.85);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+  }
+
+  /* Replace the browser's off-palette search cancel widget with our own. */
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 999px;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

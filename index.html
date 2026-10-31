@@ -4,7 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apply Flow</title>
+    <meta
+      name="description"
+      content="ApplyFlow keeps every job application, interview, and offer in one calm place. Saved on your device."
+    />
+    <meta name="theme-color" content="#f1f2ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0e0b" media="(prefers-color-scheme: dark)" />
+    <title>ApplyFlow - Job application tracker</title>
+    <script>
+      try {
+        var saved = localStorage.getItem("applyflow_theme");
+        var dark =
+          saved === "dark" ||
+          (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.classList.add("dark");
+      } catch (error) {
+        /* first paint can fall back to the light theme */
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
